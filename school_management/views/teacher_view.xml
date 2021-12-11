@@ -5,13 +5,98 @@
             <field name="name">Teachers</field>
             <field name="res_model">school.teacher</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[]</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Create Teachers</p>
             </field>
         </record>
-          <menuitem id="teacher_menu" name="Teacher" />
-          <menuitem id="school_teacher_menu" parent="teacher_menu" name="Teacher" action="teacher_menu_action" />
+        <!-- tree view -->
+        <record id="view_teacher_tree" model="ir.ui.view">
+            <field name="name">school.teacher.tree</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <tree string="Teacher">
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="joining_date"/>
+                    <field name="teacher_courses"/>
+                    <field name="teacher_blood_group"/>
+                    <field name="teacher_description"/>
+                     <field name="teacher_exp"/>
+                    <field name="salary"/>
+                    <field name="teacher_html"/>
+                    <field name="is_regular"/>
+                    <field name="service_year"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="teacher_form_view" model="ir.ui.view">
+            <field name="name">school.teacher.form.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <header>
+                            <button name='check_status' type='object' string="Check Status" class='btn btn-primary'/>
+                        </header>
+                        <group string="Teacher heading area">
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="joining_date"/>
+                            <field name="service_year" readonly="1" force_save="1"/>
+                        </group>
+                        <group>
+                            <group string="Teacher courses area">
+                                <field name="teacher_courses"/>
+                                <field name="is_regular"/>
+                                <field name="teacher_exp"/>
+                            </group>
+                            <group string="Teacher details area">
+                                <field name="teacher_blood_group"/>
+                                <field name="teacher_description"/>
+                                <field name="salary_bonus"/>
+                                <field name="teacher_salary"/>
+                                <field name="salary"/>
+                                <field name="teacher_html"/>
+                                <field name="teacher_image"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- kanban view  -->
+        <record id="teacher_kanban_view" model="ir.ui.view">
+            <field name="name">teacher.kanban.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="joining_date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <field name="name"/>
+                                    <br/>
+                                    <field name="age"/>
+                                    <br/>
+                                    <field name="gender"/>
+                                    <br/>
+                                    <field name="joining_date"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <menuitem id="teacher_menu" name="Teacher" />
+        <menuitem id="school_teacher_menu" parent="teacher_menu" name="Teacher" action="teacher_menu_action" />
     </data>
 </odoo>

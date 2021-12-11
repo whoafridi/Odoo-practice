@@ -5,16 +5,110 @@
             <field name="name">Students</field>
             <field name="res_model">school.student</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[]</field>
+            <field name="view_mode">tree,kanban,form</field> 
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Create The First Student</p>
             </field>
+        </record>        
+        <!-- tree view of student model  -->
+        <record id="view_student_tree" model="ir.ui.view">
+            <field name="name">school.student.tree</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <tree string="Student">
+                    <field name="student_dob"/>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="is_regular"/>
+                    <field name="photo"/>
+                    <field name="std_description"/>
+                    <field name="salary"/>
+                    <field name="average_mark"/>
+                    <field name="phone"/>
+                    <field name="student_blood_group"/>
+                </tree>
+            </field>
+        </record>       
+         <!-- form view of student model  -->
+        <record id="school_form_view" model="ir.ui.view">
+            <field name="name">school.student.form.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Student details">
+                            <field name="name" />
+                            <field name="age" />
+                            <field name="gender"/>
+                            <field name="student_dob" />
+                        </group>
+                        <group string="Student area">
+                            <group string="Student section">
+                                <field name="is_regular"/>
+                                <field name="student_blood_group"/>
+                                <field name="salary"/>
+                            </group>
+                            <group string="Student section 2">
+                                <field name="photo"/>
+                                <field name="std_image" />
+                                <field name="std_html"/>
+                                <field name="std_description" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Eligible criteria">
+                                <group>
+                                    <field name="admission_date"/>
+                                    <field name="std_id" />
+                                    <field name="roll" />
+                                    <field name="semester"/>
+                                    <field name="department"/>
+                                </group>
+                            </page>
+                            <page string="check">
+                                <group>
+                                    <field name="average_mark" />
+                                    <field name="phone" />
+                                    <field name="email"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button name='check_mark' type='object' string="Check Qualify" class='btn btn-primary'/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>       
+         <!-- kanban view  -->
+        <record id="student_kanban_view" model="ir.ui.view">
+            <field name="name">school.student.kanban.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name" />
+                    <field name="age" />
+                    <field name="gender"/>
+                    <field name="student_dob" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <field name="name" /><br/>
+                                    <field name="age" /><br/>
+                                    <field name="gender"/><br/>
+                                    <field name="student_dob" />
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
         </record>
         <menuitem id="school_menu" name="School" />
-        <menuitem id="school_student_menu" parent="school_menu" name="Student" action="student_menu_action" sequence="1"/>
-        <menuitem id="school_official_menu" parent="school_menu" name="Official" action="student_menu_action" sequence="2"/>
+        <menuitem id="school_student_menu" parent="school_menu" name="Official" action="student_menu_action" sequence="1"/>
+        <menuitem id="school_official_menu" parent="school_menu" name="Student" action="student_menu_action" sequence="2"/>
         <menuitem id="teacher_student_menu" parent="school_student_menu" name="Teacher" action="teacher_menu_action" />
-
     </data>
 </odoo>

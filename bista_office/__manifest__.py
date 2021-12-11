@@ -1,16 +1,15 @@
 {	
-    'name': 'School-management',
-    'description':'this module is for school management.',
+    'name': 'Bista-office',
+    'description':'this module is for @Bista Bangladesh office.',
     'version': '1.0',	
-      'sequence':2,
     'summary': 'Record all Information',	
-    'category': 'Tools',	
-    'author': '@Rafi',	
+    'author': 'whoRafi',	
+    'sequence':2,
     'depends': ['base'], 
     'data': [  
         'security/ir.model.access.csv',
-        'views/student_view.xml',
-        'views/teacher_view.xml'	
+         'views/employee_view.xml',
+        # 'views/teacher_view.xml'	
             ],	
     'license': 'AGPL-3',
     'installable': True,
