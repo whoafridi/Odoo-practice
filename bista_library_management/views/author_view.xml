@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="author_menu_action" model="ir.actions.act_window">
+            <field name="name">Author</field>
+            <field name="res_model">library.author</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create author</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_author_tree" model="ir.ui.view">
+            <field name="name">library.author.tree.view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <tree string="Author details">
+                    <field name="author_id" />
+                    <field name="name"/>
+                    <field name="author_genre" />
+                    <field name="author_description"/>
+                    <field name="is_author"/>
+                            <field name="book_name"/>
+
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="author_form_view" model="ir.ui.view">
+            <field name="name">library.author.form.view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Author details">
+                            <field name="name" />
+                            <field name="author_id" />
+                            <field name="author_description" />
+                            <field name="author_genre" />
+                            <field name="is_author"/>
+                            <field name="book_name"/>
+
+                        </group>
+                        <footer>
+                            <button name='check_mark' type='object' string="Check Qualify" class='btn btn-primary'/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="library_author_menu" parent="book_menu" name="Author" action="author_menu_action"/>
+    </data>
+</odoo>

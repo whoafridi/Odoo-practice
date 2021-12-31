@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="borrow_history_menu_action" model="ir.actions.act_window">
+            <field name="name">Borrow history</field>
+            <field name="res_model">library.borrowhistory</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">List of borrow books in library</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_borrow_history_request_tree" model="ir.ui.view">
+            <field name="name">library.borrowhistory.tree.view</field>
+            <field name="model">library.borrowhistory</field>
+            <field name="arch" type="xml">
+                <tree string="library borrow books details">
+                    <field name="borrow_book_title"/>
+                    <field name="borrower_name"/>
+                    <field name="borrower_id"/>
+                    <field name="borrower_email"/>
+                    <field name="borrower_phone"/>
+                    <field name="edition"/>
+                    <field name="price"/>
+                    <field name="pages"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="borrow_history_form_view" model="ir.ui.view">
+            <field name="name">library.borrowhistory.form.view</field>
+            <field name="model">library.borrowhistory</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="library borrow books details">
+                            <field name="borrow_book_title"/>
+                            <field name="borrower_name"/>
+                            <field name="borrower_id"/>
+                            <field name="borrower_email"/>
+                            <field name="borrower_phone"/>
+                            <field name="edition"/>
+                            <field name="price"/>
+                            <field name="pages"/>
+                            <field name="quantity"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- <menuitem id="borrow_history_menu" name="Library mangement" /> -->
+        <menuitem id="library_borrow_history_menu" parent="book_menu" name="Borrow history" action="borrow_history_menu_action"/>
+        <!-- <menuitem id="library_book_menu" parent="borrow_history_menu" name="Books" action="book_menu_action"/>
+
+        <menuitem id="library_publisher_menu" parent="borrow_history_menu" name="Publisher" action="publisher_menu_action"/>
+
+        <menuitem id="library_book_request_menu" parent="borrow_history_menu" name="Requested book" action="book_request_menu_action"/>
+        <menuitem id="library_branch_menu" parent="borrow_history_menu" name="Branch" action="branch_menu_action"/>
+        <menuitem id="library_librarian_menu" parent="borrow_history_menu" name="Librarian" action="librarian_menu_action"/>
+        <menuitem id="library_author_menu" parent="borrow_history_menu" name="Author" action="author_menu_action"/>
+        <menuitem id="library_book_library_menu" parent="borrow_history_menu" name="Library" action="library_menu_action"/>
+        <menuitem id="library_user_menu" parent="borrow_history_menu" name="User" action="user_menu_action"/> -->
+
+    </data>
+</odoo>

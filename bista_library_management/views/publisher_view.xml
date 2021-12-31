@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="publisher_menu_action" model="ir.actions.act_window">
+            <field name="name">publisher</field>
+            <field name="res_model">library.publisher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create library publisher</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_publisher_tree" model="ir.ui.view">
+            <field name="name">library.publisher.tree.view</field>
+            <field name="model">library.publisher</field>
+            <field name="arch" type="xml">
+                <tree string="Publisher details">
+                    <field name="name"/>
+                    <field name="opening_time"/>
+                    <field name="address"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="publisher_form_view" model="ir.ui.view">
+            <field name="name">library.publisher.form.view</field>
+            <field name="model">library.publisher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Publisher details">
+                            <field name="name" />
+                            <field name="address" />
+                            <field name="opening_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="library_publisher_menu" parent="book_menu" name="Publisher" action="publisher_menu_action"/>
+    </data>
+</odoo>

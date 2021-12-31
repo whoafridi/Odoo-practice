@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_library_book,access.library.book,model_library_book,,1,1,1,1
+access_library_author,access.library.author,model_library_author,,1,1,1,1
+access_library_bookrequest,access.library.bookrequest,model_library_bookrequest,,1,1,1,1
+access_library_branch,access.library.branch,model_library_branch,,1,1,1,1
+access_library_borrowhistory,access.library.borrowhistory,model_library_borrowhistory,,1,1,1,1
+access_library_library,access.library.library,model_library_library,,1,1,1,1
+access_library_librarian,access.library.librarian,model_library_librarian,,1,1,1,1
+access_library_publisher,access.library.publisher,model_library_publisher,,1,1,1,1
+access_library_user,access.library.user,model_library_user,,1,1,1,1
+

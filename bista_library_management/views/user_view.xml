@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="user_menu_action" model="ir.actions.act_window">
+            <field name="name">User</field>
+            <field name="res_model">library.user</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create user</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_user_tree" model="ir.ui.view">
+            <field name="name">library.user.tree.view</field>
+            <field name="model">library.user</field>
+            <field name="arch" type="xml">
+                <tree string="User details">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="user_id"/>
+                    <field name="phone"/>
+                    <field name="date_of_joining"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="user_form_view" model="ir.ui.view">
+            <field name="name">library.user.form.view</field>
+            <field name="model">library.user</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="User details">
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="user_id"/>
+                            <field name="phone"/>
+                            <field name="date_of_joining"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="library_user_menu" parent="book_menu" name="User" action="user_menu_action"/> 
+    </data>
+</odoo>

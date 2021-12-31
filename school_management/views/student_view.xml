@@ -17,7 +17,7 @@
             <field name="arch" type="xml">
                 <tree string="Student">
                     <field name="student_dob"/>
-                    <field name="name"/>
+                    <field name="full_name"/>
                     <field name="age"/>
                     <field name="gender"/>
                     <field name="is_regular"/>
@@ -38,7 +38,9 @@
                 <form>
                     <sheet>
                         <group string="Student details">
-                            <field name="name" />
+                            <field name="first_name" />
+                            <field name="last_name" />
+                            <field name="full_name" />
                             <field name="age" />
                             <field name="gender"/>
                             <field name="student_dob" />
@@ -64,6 +66,8 @@
                                     <field name="roll" />
                                     <field name="semester"/>
                                     <field name="department"/>
+                                    <field name="email_domain"/>
+                                    <field name="generated_email"/>
                                 </group>
                             </page>
                             <page string="check">
@@ -87,7 +91,7 @@
             <field name="model">school.student</field>
             <field name="arch" type="xml">
                 <kanban>
-                    <field name="name" />
+                    <field name="full_name" />
                     <field name="age" />
                     <field name="gender"/>
                     <field name="student_dob" />
@@ -95,7 +99,7 @@
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
                                 <div class="oe_kanban_details">
-                                    <field name="name" /><br/>
+                                    <field name="full_name" /><br/>
                                     <field name="age" /><br/>
                                     <field name="gender"/><br/>
                                     <field name="student_dob" />

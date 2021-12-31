@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="branch_menu_action" model="ir.actions.act_window">
+            <field name="name">Branch</field>
+            <field name="res_model">library.branch</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create Branches</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_branch_tree" model="ir.ui.view">
+            <field name="name">library.branch.tree.view</field>
+            <field name="model">library.branch</field>
+            <field name="arch" type="xml">
+                <tree string="Branch name">
+                    <field name="name"/>
+                    <field name="branch_id"/>
+                    <field name="branch_address"/>
+                    <field name="email"/>
+                    <field name="division"/>
+                    <field name="contact"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="branch_form_view" model="ir.ui.view">
+            <field name="name">library.branch.form.view</field>
+            <field name="model">library.branch</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Branch details">
+                            <field name="name" />
+                            <field name="branch_id"/>
+                            <field name="branch_address"/>
+                            <field name="email"/>
+                            <field name="division"/>
+                            <field name="contact"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="library_branch_menu" parent="book_menu" name="Branch" action="branch_menu_action"/>
+    </data>
+</odoo>

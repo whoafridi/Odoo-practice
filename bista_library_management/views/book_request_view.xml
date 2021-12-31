@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="book_request_menu_action" model="ir.actions.act_window">
+            <field name="name">Requested books</field>
+            <field name="res_model">library.bookrequest</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Request a book</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_book_request_tree" model="ir.ui.view">
+            <field name="name">library.bookrequest.tree.view</field>
+            <field name="model">library.bookrequest</field>
+            <field name="arch" type="xml">
+                <tree string="Requested books details">
+                    <field name="title"/>
+                    <field name="author"/>
+                    <field name="author_genre"/>
+                    <field name="branch"/>
+                    <field name="publisher"/>
+                    <field name="edition"/>
+                    <field name="requested_by"/>
+                    <field name="state"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="book_request_form_view" model="ir.ui.view">
+            <field name="name">library.bookrequest.form.view</field>
+            <field name="model">library.bookrequest</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Requested books details">
+                                <field name="title"/>
+                                <field name="author"/>
+                                <field name="author_genre"/>
+                                <field name="branch"/>
+                                <field name="publisher"/>
+                            </group>
+                            <group>
+                                <field name="edition"/>
+                                <field name="requested_by"/>
+                                <field name="state"/>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="library_book_request_menu" parent="book_menu" name="Requested book" action="book_request_menu_action"/>
+    </data>
+</odoo>
