@@ -8,13 +8,15 @@ class BorrowHistory(models.Model):
 
     borrow_book_title = fields.Many2one('library.library',string="Borrow book name")
     borrower_id = fields.Char(string="Borrower ID")
-    borrower_name = fields.Char(string="Borrower name", required=True)
+    borrower_name = fields.Many2one('library.user',string="Borrower name")
     borrower_email = fields.Char(string="Borrower email", required=True)
     borrower_phone = fields.Char(string="Borrower phone", required=True)
     quantity = fields.Integer(string='Quantity', required=True)
     price = fields.Float(string="Price", required=True)
     pages = fields.Integer(string="Pages", required=True)
     edition = fields.Selection([('first','First'),('second','Second'),('third','Third')],string="Edition", required=True)
+
+
 
     @api.model
     def create(self, vals):

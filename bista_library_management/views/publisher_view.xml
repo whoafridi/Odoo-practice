@@ -17,6 +17,8 @@
             <field name="arch" type="xml">
                 <tree string="Publisher details">
                     <field name="name"/>
+                    <field name="author"/>
+                    <field name="book_name"/>
                     <field name="opening_time"/>
                     <field name="address"/>
                 </tree>
@@ -31,6 +33,8 @@
                     <sheet>
                         <group string="Publisher details">
                             <field name="name" />
+                            <field name="author"/>
+                            <field name="book_name"/>
                             <field name="address" />
                             <field name="opening_time"/>
                         </group>

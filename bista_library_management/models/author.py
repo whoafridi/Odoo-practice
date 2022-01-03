@@ -32,32 +32,27 @@ class Author(models.Model):
         return res
     
     @api.multi
-    def check_mark(self):
-        au = self.env['library.author'].search([('is_author','=',True),('book_name','=','React JS')])
+    def check_name(self):
+        au = self.env['library.author'].search([('is_author','=',True),('book_name.name','=','odoo'),('book_name.branch.name','=','Mohakhali')])
         for i in au:
-            print(i)
-            if i.name == 'Mahmud':
-                print('got mahmud')
+            print(i.name, i.book_name.branch.name)
+            if i.name == 'kafi' or i.name == 'Kafu':
+                print('/--------/ /--------/ Find required things.')
+                raise UserError(_("Find Kafi Branch from Mohakhali"))
     
     @api.multi
     def write(self, vals):
         # check id status
         print("write------book name value",vals)
         
-        if vals.get("author_id") == None:
-            raise UserError(_("required auhtor id"))
-        # if vals.get('book_name') == None:
-        #     raise UserError(_("required book_name"))
+        # if vals.get('author_id') == None:
+        #      raise UserError(_("required auhtor id"))
+        # if not vals['author_id']:
+        #      raise UserError(_("auhtor id can't be empty"))
 
         print(self.book_name.name, self.book_name.book_id, self.book_name.branch.name)
         if self.book_name.name == 'React JS':
             print("got it")
-        
-        au = self.env['library.author'].search([('is_author','=',True)])
-        for i in au:
-            #print(i.name)
-            if i.name == 'Mahmud':
-                print('Got it')
 
         res = super(Author,self).write(vals)
         return res

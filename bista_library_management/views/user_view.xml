@@ -2,12 +2,12 @@
 <odoo>
     <data>
         <record id="user_menu_action" model="ir.actions.act_window">
-            <field name="name">User</field>
+            <field name="name">Reader</field>
             <field name="res_model">library.user</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Create user</p>
+                <p class="oe_view_nocontent_create">Create Reader</p>
             </field>
         </record>
         <!-- tree view of model  -->
@@ -17,6 +17,7 @@
             <field name="arch" type="xml">
                 <tree string="User details">
                     <field name="name"/>
+                    <field name="book_name"/>
                     <field name="email"/>
                     <field name="user_id"/>
                     <field name="phone"/>
@@ -33,6 +34,7 @@
                     <sheet>
                         <group string="User details">
                             <field name="name"/>
+                            <field name="book_name"/>
                             <field name="email"/>
                             <field name="user_id"/>
                             <field name="phone"/>
@@ -43,6 +45,6 @@
             </field>
         </record>
 
-        <menuitem id="library_user_menu" parent="book_menu" name="User" action="user_menu_action"/> 
+        <menuitem id="library_user_menu" parent="book_menu" name="Reader" action="user_menu_action"/>
     </data>
 </odoo>

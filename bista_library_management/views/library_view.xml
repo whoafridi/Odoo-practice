@@ -27,6 +27,7 @@
                     <field name="pages"/>
                     <field name="quantity"/>
                     <field name="description"/>
+                    <field name="publisher"/>
                 </tree>
             </field>
         </record>
@@ -47,6 +48,7 @@
                             <field name="pages"/>
                             <field name="quantity"/>
                             <field name="description"/>
+                            <field name="publisher"/>
                             <field name="branch"/>
                         </group>
                     </sheet>

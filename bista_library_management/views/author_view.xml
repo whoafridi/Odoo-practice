@@ -43,7 +43,7 @@
 
                         </group>
                         <footer>
-                            <button name='check_mark' type='object' string="Check Qualify" class='btn btn-primary'/>
+                            <button name='check_name' type='object' string="Check Qualify" class='btn btn-danger'/>
                         </footer>
                     </sheet>
                 </form>

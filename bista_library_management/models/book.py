@@ -25,14 +25,14 @@ class Book(models.Model):
     
     name = fields.Char(string="Book name", required=True)
     book_id = fields.Char(string="Book ID")
-    book_image = fields.Binary(string='Cover photo')
     author_genre = fields.Selection([('demo_genre','Demo genre'),('science fiction','Science fiction'),('programming','Programming'),('thriller','Thriller'),('horror','Horror'),('historical','Historical')],string='Author written genre')
     email = fields.Char(string='Email')
     edition = fields.Char(string="Copyright Edition", required=True)
     price = fields.Float(string='Price', required=True)
     pages = fields.Integer(string='Number of pages')
     isbn_no = fields.Char(string='ISBN no')
-    description = fields.Text(string='Description of books')
+    description = fields.Text(string="Description of books")
+    is_available = fields.Boolean(string="Is available?")
     # relational fields
     author = fields.Many2one('library.author', string='Author name')
     branch = fields.Many2one('library.branch', string='Which Branch ?')
@@ -61,20 +61,23 @@ class Book(models.Model):
         res = super(Book, self).create(values)
         return res
 
-    
+    @api.multi
+    def check_name(self):
+        _name = self.env['library.book'].search(['|',('author.is_author','=',True),('name','=','odoo'),('branch.name','=','Lalmatia')])
+        for rec in _name:
+            raise UserError(_("Python for all"))
+
     @api.multi
     def write(self, values):
         print("==============\n",values)
         # check description status
-        if values.get('description') == None or values.get('isbn_no') == None:
-            raise UserError(_("Required !"))
-        if not values['description']:
-            raise UserError(_("Description can't be empty"))
-        else:
-            values['description'] = values['description']
-        # check isbn status
-        if not values.get('isbn_no'):
-            values['isbn_no'] = '001-002-003-004'
+        # if values.get('description') == None or values.get('isbn_no') == None:
+        #     raise UserError(_("Required !"))
+        # else:
+        #     values['description'] = values['description']
+        # # check isbn status
+        # if not values.get('isbn_no'):
+        #     values['isbn_no'] = '001-002-003-004'
         
         res = super(Book, self).write(values)
         return res

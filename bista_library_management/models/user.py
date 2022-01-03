@@ -7,12 +7,15 @@ class User(models.Model):
     _name = 'library.user'
     _description = 'library user info'
 
-    name = fields.Char(string='User name', required=True)
+    book_name = fields.Many2one('library.book',string="Book name")
+    name = fields.Char(string='Name', required=True)
     email = fields.Char(string="Email")
     user_id = fields.Char(string="User ID")
     phone = fields.Char(string='Phone')
     date_of_joining = fields.Date(string="Date of joining", default=date.today())
 
+    # a = self.env['library.user'].search([('book_name.name')])
+    
     @api.onchange('date_of_joining')
     def change_id(self):
         self.user_id = ''

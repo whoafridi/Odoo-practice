@@ -16,6 +16,12 @@ class Library(models.Model):
     description = fields.Text(string='Book description')
     # relational field
     branch = fields.Many2one('library.branch', string='Which Branch ?')
+    publisher = fields.Many2one('library.publisher', string='Publisher')
+
+    @api.multi
+    def check_name(self):
+        _name = self.env['library.library'].search([('name.is_available','=',True)])
+        print(_name)
 
     @api.model
     def create(self, values):
@@ -35,10 +41,18 @@ class Library(models.Model):
     @api.multi
     def write(self, values):
         print('---', values)
-        if values['pages'] == 0:
-            raise UserError(_("Pages can't be empty"))
-        if values['quantity'] ==0:
-            raise UserError(_("Quantity can't be empty"))
+        # if values.get('pages') == None:
+        #     raise UserError(_("required"))
+        # if values.get('quantity') == None:
+        #     raise UserError(_("required"))
+        _name = self.env['library.library'].search([('name.is_available','!=',True)])
+        for rec in _name:
+            print('-----library book name------',rec.name.name)
+            print('-----library--publisher--author',rec.name.name, rec.name.isbn_publisher.name, rec.author.name)
+            print('-----library----publisher address----authordescription----',rec.name.isbn_publisher.address, rec.author.author_description)
+        #_pub = self.env['library.library'].search([('name.is_available','=',True)])
+        
+        
 
         res = super(Library, self).write(values)
         return res

@@ -17,11 +17,11 @@
             <field name="arch" type="xml">
                 <tree string="Book name">
                     <field name="name"/>
-                    <field name="book_image" />
                     <field name="book_id" />
                     <field name="author"/>
                     <field name="branch"/>
                     <field name="author_genre"/>
+                    <field name="is_available"/>
                     <field name='email'/>
                     <field name="edition"/>
                     <field name="price"/>
@@ -42,7 +42,6 @@
                         <group string="Book">
                             <field name="name"/>
                             <field name="book_id" />
-                            <field name="book_image" />
                         </group>
                         <group string="Book author details">
                             <field name="author"/>
@@ -50,6 +49,7 @@
                             <field name='email'/>
                             <field name="edition"/>
                             <field name="branch"/>
+                            <field name="is_available"/>
                         </group>
                         <notebook>
                             <page string="Price Details">
@@ -66,7 +66,9 @@
                                 </group>
                             </page>
                         </notebook>
-
+                        <footer>
+                            <button name='check_name' type='object' string="Check status" class='btn btn-warning'/>
+                        </footer>
                     </sheet>
                 </form>
             </field>

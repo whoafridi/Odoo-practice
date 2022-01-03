@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_menu_activity" model="ir.actions.act_window">
+            <field name="name">Activity</field>
+            <field name="res_model">library.activity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Activity</p>
+            </field>
+        </record>
+        <!-- tree view of model  -->
+        <record id="view_activity_tree" model="ir.ui.view">
+            <field name="name">library.activity.tree.view</field>
+            <field name="model">library.activity</field>
+            <field name="arch" type="xml">
+                <tree string="Activity details">
+                    <field name="book_name"/>
+                    <field name="reader_name"/>
+                    <field name="entry_time"/>
+                    <field name="exit_time"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of model  -->
+        <record id="activity_form_view" model="ir.ui.view">
+            <field name="name">library.activity.form.view</field>
+            <field name="model">library.activity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Activity details">
+                            <field name="book_name"/>
+                            <field name="reader_name"/>
+                            <field name="entry_time"/>
+                            <field name="exit_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_library_activity" parent="book_menu" name="Activity" action="action_menu_activity"/>
+    </data>
+</odoo>
