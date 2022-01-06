@@ -11,6 +11,12 @@ class Branch(models.Model):
     email = fields.Char(string='Email')
     branch_id = fields.Char(string='Branch ID')
 
+    @api.multi
+    def check_author(self):
+        rec = self.env['library.borrowhistory'].search([('branch.name','=',self.name)])
+        for i in rec:
+            print('----book name----', i.borrow_book_title.name.name,'----author name----', i.borrow_book_title.author.name,'----borrower name----',i.borrower_name.name,'---- email ----', i.borrower_name.email,'\n')
+
     @api.onchange('division')
     def change_id(self):
         id = ''

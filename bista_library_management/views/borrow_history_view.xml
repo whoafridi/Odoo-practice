@@ -19,6 +19,7 @@
                     <field name="borrow_book_title"/>
                     <field name="borrower_name"/>
                     <field name="borrower_id"/>
+                    <field name="branch"/>
                     <field name="borrower_email"/>
                     <field name="borrower_phone"/>
                     <field name="edition"/>
@@ -34,10 +35,13 @@
             <field name="model">library.borrowhistory</field>
             <field name="arch" type="xml">
                 <form>
+                         <button name='show_borrowhistory' type='object' string="show borrow history" class='btn btn-primary'/> 
+
                     <sheet>
                         <group string="library borrow books details">
                             <field name="borrow_book_title"/>
                             <field name="borrower_name"/>
+                            <field name="branch"/>
                             <field name="borrower_id"/>
                             <field name="borrower_email"/>
                             <field name="borrower_phone"/>

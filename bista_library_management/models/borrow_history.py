@@ -9,14 +9,23 @@ class BorrowHistory(models.Model):
     borrow_book_title = fields.Many2one('library.library',string="Borrow book name")
     borrower_id = fields.Char(string="Borrower ID")
     borrower_name = fields.Many2one('library.user',string="Borrower name")
+    branch = fields.Many2one('library.branch', string="For which branch ?")
     borrower_email = fields.Char(string="Borrower email", required=True)
     borrower_phone = fields.Char(string="Borrower phone", required=True)
     quantity = fields.Integer(string='Quantity', required=True)
     price = fields.Float(string="Price", required=True)
     pages = fields.Integer(string="Pages", required=True)
     edition = fields.Selection([('first','First'),('second','Second'),('third','Third')],string="Edition", required=True)
+    
+     # #show borrowhistory
+    @api.multi 
+    def show_borrowhistory(self):
+        rec = self.env['library.borrowhistory'].search([('borrow_book_title.name.name','=',self.borrow_book_title.name.name),('borrow_book_title.author.name','=',self.borrow_book_title.author.name)])
 
-
+        for i in rec:
+        #     message = f"Book name : {self.book_name.name} - Borrower name : {self.borrower_name.name} - Book name : {self.branch.name} {i.branch.name}"
+        #     raise UserError(_(message))
+            print(self.borrow_book_title.name.name, self.quantity, self.borrower_name.name)
 
     @api.model
     def create(self, vals):
@@ -75,6 +84,5 @@ class BorrowHistory(models.Model):
             print(regex)
             if not regex:
                 raise UserError(_("Email not valid"))
-
 
 

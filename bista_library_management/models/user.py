@@ -1,6 +1,6 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
-from datetime import date
+from datetime import datetime
 import re
 
 class User(models.Model):
@@ -12,9 +12,23 @@ class User(models.Model):
     email = fields.Char(string="Email")
     user_id = fields.Char(string="User ID")
     phone = fields.Char(string='Phone')
-    date_of_joining = fields.Date(string="Date of joining", default=date.today())
+    date_of_joining = fields.Datetime(string="Date of joining")
 
-    # a = self.env['library.user'].search([('book_name.name')])
+    @api.model
+    def create(self,values):
+
+        res = super(User, self).create(values)
+        return res
+
+    @api.multi
+    def write(self, values):
+        print('-----\n', values)
+        rec = self.env['library.user'].search([('book_name.is_available','=',True)])
+        for i in rec:
+            print("--------",i.book_name.name, i.book_name.author.name)
+
+        res = super(User, self).write(values)
+        return res
     
     @api.onchange('date_of_joining')
     def change_id(self):

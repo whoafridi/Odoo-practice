@@ -1,3 +1,4 @@
+import re
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from datetime import date
@@ -7,7 +8,7 @@ class BookRequest(models.Model):
     _description = 'book request info'
 
     title = fields.Many2one('library.book', string='Requested book title', required=True)
-    author = fields.Char(string='Requested book Author name', required=True)
+    author = fields.Many2one('library.author',string='Requested book Author name')
     author_genre = fields.Selection([('science fiction','Science fiction'),('programming','Programming'),('thriller','Thriller'),('horror','Horror'),('historical','Historical')],string='Author written genre')
     #relational field
     branch = fields.Many2one('library.branch',string='Which branch ?')
@@ -33,5 +34,9 @@ class BookRequest(models.Model):
     def write(self, values):
         print('-----\n', values)
 
+        # check the requested book
+        requested_book = self.env['library.bookrequest'].search([('title.is_available','!=',True)])
+        for rec in requested_book:
+            print('----requested book----',rec.title.name, rec.author)
         res = super(BookRequest, self).write(values)
         return res

@@ -65,7 +65,8 @@ class Book(models.Model):
     def check_name(self):
         _name = self.env['library.book'].search(['|',('author.is_author','=',True),('name','=','odoo'),('branch.name','=','Lalmatia')])
         for rec in _name:
-            raise UserError(_("Python for all"))
+            message = f"Book - {rec.name}"
+            raise UserError(_(message))
 
     @api.multi
     def write(self, values):

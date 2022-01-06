@@ -29,6 +29,9 @@
             <field name="model">library.activity</field>
             <field name="arch" type="xml">
                 <form>
+                    <footer>
+                        <button name='read_book' type='object' string="Check last 1month" class='btn btn-primary'/>
+                    </footer>
                     <sheet>
                         <group string="Activity details">
                             <field name="book_name"/>

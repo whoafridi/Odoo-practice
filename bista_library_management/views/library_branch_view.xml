@@ -31,7 +31,12 @@
             <field name="model">library.branch</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name='check_author' type='object' string="Check author" class='btn btn-primary'/>
+                    </header>
+                    
                     <sheet>
+
                         <group string="Branch details">
                             <field name="name" />
                             <field name="branch_id"/>

@@ -19,9 +19,27 @@ class Library(models.Model):
     publisher = fields.Many2one('library.publisher', string='Publisher')
 
     @api.multi
-    def check_name(self):
-        _name = self.env['library.library'].search([('name.is_available','=',True)])
-        print(_name)
+    def check_notavailable(self):
+        notavailablebook_name = self.env['library.library'].search([('name.is_available','!=',True)])
+        price = 0
+        for rec in notavailablebook_name:
+            print('----book name------',rec.name.name,'---publisher name--', rec.name.isbn_publisher.name,'---author name--', rec.author.name,'---price--', rec.name.price,'\n')
+            price += rec.name.price
+        print('total price :',price)
+    
+
+    @api.multi
+    def check_requestedbook(self):
+        requested_book = self.env['library.bookrequest'].search([('state','=','requested')])
+        for rec in requested_book:
+            print('----requested book----',rec.title.name,'---name----', rec.requested_by.name, '----author name----',rec.author, '----publisher name----',rec.publisher,'\n')
+
+    @api.multi
+    def check_available(self):
+        availablebook_name = self.env['library.library'].search([('name.is_available','=',True)])
+        for rec in availablebook_name:            
+            print('-----found book name----',rec.name.name, rec.name.isbn_publisher.name, rec.author.name)
+            print('-----found book name----',rec.name.isbn_publisher.address, rec.author.author_description) 
 
     @api.model
     def create(self, values):
@@ -41,18 +59,16 @@ class Library(models.Model):
     @api.multi
     def write(self, values):
         print('---', values)
-        # if values.get('pages') == None:
-        #     raise UserError(_("required"))
-        # if values.get('quantity') == None:
-        #     raise UserError(_("required"))
-        _name = self.env['library.library'].search([('name.is_available','!=',True)])
-        for rec in _name:
-            print('-----library book name------',rec.name.name)
-            print('-----library--publisher--author',rec.name.name, rec.name.isbn_publisher.name, rec.author.name)
-            print('-----library----publisher address----authordescription----',rec.name.isbn_publisher.address, rec.author.author_description)
-        #_pub = self.env['library.library'].search([('name.is_available','=',True)])
+        # check if book not available
+        notavailablebook_name = self.env['library.library'].search([('name.is_available','!=',True)])
+        for rec in notavailablebook_name:
+            print('-----not found book name------',rec.name.name)
         
-        
+        # check if book not available
+        availablebook_name = self.env['library.library'].search([('name.is_available','=',True)])
+        for rec in availablebook_name:            
+            print('-----found book name----',rec.name.name, rec.name.isbn_publisher.name, rec.author.name)
+            print('-----found book name----',rec.name.isbn_publisher.address, rec.author.author_description)        
 
         res = super(Library, self).write(values)
         return res

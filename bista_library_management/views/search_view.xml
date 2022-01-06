@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="menu_action_search" model="ir.actions.act_window">
+            <field name="name">Search</field>
+            <field name="res_model">library.search</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">search</p>
+            </field>
+        </record>
+
+        <!-- tree view of model  -->
+        <record id="view_library_search" model="ir.ui.view">
+            <field name="name">library.search.tree.view</field>
+            <field name="model">library.search</field>
+            <field name="arch" type="xml">
+                <tree string="Search details">
+                    <field name="book_name"/>
+                    <field name="branch_name"/>
+                    <field name="reader_name"/>
+                    <field name="author"/>
+                    <field name="library"/>
+                    <field name="librarian"/>
+                    <field name="publisher"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view of model  -->
+        <record id="search_form_view" model="ir.ui.view">
+            <field name="name">library.search.form.view</field>
+            <field name="model">library.search</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name='details_bookname' type='object' string="show book details" class='btn btn-primary'/>
+                        <button name='details_branch' type='object' string="show branch details" class='btn btn-primary'/>
+                        <button name='details_reader' type='object' string="show user/reader details" class='btn btn-primary'/>
+                        <button name='details_author' type='object' string="show author details" class='btn btn-primary'/>
+                        <button name='details_library' type='object' string="show library details" class='btn btn-primary'/>
+                        <button name='details_librarian' type='object' string="show librarian details" class='btn btn-primary'/>
+                        <button name='details_publisher' type='object' string="show publisher details" class='btn btn-primary'/>
+                        <button name='show_borrowhistory' type='object' string="show borrow history" class='btn btn-primary'/>
+                        <button name='show_activity' type='object' string="show activity history" class='btn btn-primary'/>
+                        <button name='show_requestedbook' type='object' string="show request history" class='btn btn-primary'/>
+                    </header>
+                    <sheet>
+                        <group string="Search details">
+                            <field name="book_name"/>
+                            <field name="branch_name"/>
+                            <field name="reader_name"/>
+                            <field name="author"/>
+                            <field name="library"/>
+                            <field name="librarian"/>
+                            <field name="publisher"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_library_search" parent="book_menu" name="Search" action="menu_action_search"/>
+        <!-- <menuitem id="library_library_menu" parent="library_librarian_menu" name="Library" action="library_menu_action"/>  -->
+
+    </data>
+</odoo>

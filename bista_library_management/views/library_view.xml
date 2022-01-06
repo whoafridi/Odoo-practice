@@ -38,6 +38,10 @@
             <field name="model">library.library</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name='check_notavailable' type='object' string="Check not available" class='btn btn-primary'/>
+                        <button name='check_requestedbook' type='object' string="Check requested book" class='btn btn-primary'/>
+                    </header>
                     <sheet>
                         <group string="library books details">
                             <field name="name"/>

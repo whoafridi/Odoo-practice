@@ -17,7 +17,8 @@
         'views/library_view.xml',
         'views/user_view.xml',
         'views/borrow_history_view.xml',
-        'views/activity_view.xml'
+        'views/activity_view.xml',
+        'views/search_view.xml'
     ],
     'license': 'AGPL-3',
     'installable': True,

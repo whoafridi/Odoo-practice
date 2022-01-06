@@ -8,3 +8,4 @@ from . import user
 from . import borrow_history
 from . import book_request
 from . import activity
+from . import search
