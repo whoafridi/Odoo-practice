@@ -1,7 +1,7 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
-class Activity(models.Model):
+class Search(models.Model):
     _name = 'library.search'
     _description = 'search info'
 
@@ -72,141 +72,92 @@ class Activity(models.Model):
     #show borrowhistory
     @api.multi 
     def show_borrowhistory(self):
-        print(self.book_name.name, self.reader_name.name, self.author.name)
-        if self.book_name.name:
-            rec = self.env['library.borrowhistory'].search([('borrow_book_title.name.name','=',self.book_name.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book"))
-        elif self.reader_name.name:
-            rec = self.env['library.borrowhistory'].search([('borrower_name.name','=',self.reader_name.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book")) 
-        elif self.author.name:
-            rec = self.env['library.borrowhistory'].search([('borrow_book_title.author.name','=',self.author.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book"))
-        elif self.book_name.name and self.reader_name.name:
-            rec = self.env['library.borrowhistory'].search([('borrow_book_title.name.name','=',self.book_name.name),('borrower_name.name','=',self.reader_name.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book"))
-        elif self.book_name.name and self.author.name:
-            rec = self.env['library.borrowhistory'].search([('borrow_book_title.name.name','=',self.book_name.name),('borrow_book_title.author.name','=',self.author.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book"))
-        elif self.reader_name.name and self.author.name:
-            rec = self.env['library.borrowhistory'].search([('borrower_name.name','=',self.reader_name.name),('borrow_book_title.author.name','=',self.author.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book"))
-        elif self.book_name.name and self.reader_name.name and self.author.name:
-            rec = self.env['library.borrowhistory'].search([('borrow_book_title.name.name','=',self.book_name.name),('borrower_name.name','=',self.reader_name.name),('borrow_book_title.author.name','=',self.author.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("Requested user not borrow any book"))
+        print('--- from self ---',self.book_name.name, self.reader_name.name, self.author.name)
+        message = ''
+        # book name, author name, reader name
+        if self.book_name.name and self.reader_name.name and self.author.name:
+            rec = self.env['library.borrowhistory'].search([
+                ('borrow_book_title.name.name','=',self.book_name.name),('borrower_name.name','=',self.reader_name.name),
+                ('borrow_book_title.author.name','=',self.author.name)])
 
-    #show activity
+        # book name/author and book/reader and author/reader                
+        elif self.book_name.name and self.reader_name.name or self.book_name.name and self.author.name or self.reader_name.name and self.author.name:
+            print("#### 1 ####")
+            rec = self.env['library.borrowhistory'].search([
+                '|','|',
+                '&',('borrow_book_title.name.name','=',self.book_name.name),('borrower_name.name','=',self.reader_name.name),
+                '&',('borrow_book_title.name.name','=',self.book_name.name),('borrow_book_title.author.name','=',self.author.name),
+                '&',('borrower_name.name','=',self.reader_name.name),('borrow_book_title.author.name','=',self.author.name)])
+        
+        # book name or author or reader 
+        elif self.book_name.name or self.author.name or self.reader_name.name:
+            rec = self.env['library.borrowhistory'].search(['|','|',
+                ('borrow_book_title.name.name','=',self.book_name.name),('borrow_book_title.author.name','=',self.author.name),
+                ('borrower_name.name','=',self.reader_name.name)
+                ])
+            
+        if rec:
+            for i in rec:
+                print(i.borrow_book_title.name.name,self)
+                message += f"Book name : {i.borrow_book_title.name.name} - Borrower name : {i.borrower_name.name} - Branch name : {i.branch.name} - Quantity : {i.quantity}\n"
+            raise UserError(_(message))
+        else:
+            raise UserError(_("Requested user not borrow any book"))
+            
+
+    # show activity
     @api.multi 
     def show_activity(self):
-        print(self.book_name.name, self.reader_name.name, self.author.name)
+        print(self.book_name.name, self.reader_name.name)
+        message = ''
         if self.book_name.name and self.reader_name.name:
-            rec = self.env['library.activity'].search([('book_name.name','=',self.book_name.name),('reader_name.name','=',self.reader_name.name)])
-            print(rec)
-            if rec:
+            rec = self.env['library.activity'].search([
+                    ('book_name.name','=',self.book_name.name),('reader_name.name','=',self.reader_name.name)
+                    ])
+        elif self.book_name.name or self.reader_name.name:
+            print("### 2 ###")
+            rec = self.env['library.activity'].search(['|',('book_name.name','=',self.book_name.name),
+                ('reader_name.name','=',self.reader_name.name)])
+    
+        if rec:
                 for i in rec:
-                    message = f"Book name : {self.book_name.name} - Reader name : {i.reader_name.name} - email : {i.reader_name.email}"
-                    raise UserError(_(message))
-            else:
+                    print(i.book_name.name, self)
+                    message += f"Book name : {i.book_name.name} - Reader name : {i.reader_name.name} - email : {i.reader_name.email} - exit time : {i.exit_time}\n"
+                raise UserError(_(message))
+        else:
                 raise UserError(_("Requested user don't have any activity"))
-
+    
     #show requested book
     @api.multi 
     def show_requestedbook(self):
         print(self.book_name.name, self.author.name, self.branch_name.name)
-        if self.book_name.name:
-            rec = self.env['library.bookrequest'].search([('title.name','=',self.book_name.name)])
-            print(rec)
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
-        elif self.branch_name.name:
-            rec = self.env['library.bookrequest'].search([('branch.name','=', self.branch_name.name)])
-            print(rec)
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
-        elif self.author.name:
-            rec = self.env['library.bookrequest'].search([('author.name','=',self.author.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
-        elif self.book_name.name and self.branch_name.name:
-            rec = self.env['library.bookrequest'].search([('title.name','=',self.book_name.name),('branch.name','=', self.branch_name.name)])
-            print(rec)
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
-        elif self.book_name.name and self.author.name:
-            rec = self.env['library.bookrequest'].search([('title.name','=',self.book_name.name),('author.name','=',self.author.name)])
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
-        elif self.author.name and self.branch_name.name:
-            rec = self.env['library.bookrequest'].search([('author.name','=',self.author.name),('branch.name','=',self.branch_name.name)])
-            print(rec)
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
-        elif self.book_name.name and  self.author.name and self.branch_name.name:
+        message = ''
+        # book and author and branch
+        if self.book_name.name and  self.author.name and self.branch_name.name:
+            print("#################### 1 ###################")
             rec = self.env['library.bookrequest'].search([('title.name','=',self.book_name.name),('author.name','=',self.author.name),('branch.name','=',self.branch_name.name)])
-            print(rec)
-            if rec:
-                for i in rec:
-                    message = f"Book name : {self.book_name.name} - Requested by : {self.reader_name.name} Author {self.author.name}"
-                    raise UserError(_(message))
-            else:
-                raise UserError(_("user don't request any book"))
+
+        # book/author and author/book and branch/author
+        elif self.book_name.name and self.branch_name.name or self.book_name.name and self.author.name or self.author.name and self.branch_name.name:
+            print("#################### 3 ###################")
+            rec = self.env['library.bookrequest'].search([
+                '|','|',
+                '&',('title.name','=',self.book_name.name),('branch.name','=', self.branch_name.name),
+                '&',('title.name','=',self.book_name.name),('author.name','=',self.author.name),
+                '&',('author.name','=',self.author.name),('branch.name','=',self.branch_name.name)
+                ])
+
+        # book or author or branch
+        elif self.book_name.name or self.author.name or self.branch_name.name:
+            print("#################### 2 ###################")
+            rec = self.env['library.bookrequest'].search([
+                '|','|',
+                ('title.name','=',self.book_name.name),
+                ('author.name','=',self.author.name),('branch.name','=', self.branch_name.name)])
         
+        if rec:
+            for i in rec:
+                message += f"Book name : {i.title.name} - Requested by : {i.requested_by.name} Author : {i.author.name}\n"
+            raise UserError(_(message))
+        else:
+            raise UserError(_("user don't request any book"))      
