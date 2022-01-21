@@ -21,7 +21,10 @@
                     <field name="email"/>
                     <field name="user_id"/>
                     <field name="phone"/>
+                    <field name="book_ids" widget="many2many_tags"/>
                     <field name="date_of_joining"/>
+                    <field name="reader_name"/>
+                    <field name="library"/>
                 </tree>
             </field>
         </record>
@@ -39,6 +42,32 @@
                             <field name="user_id"/>
                             <field name="phone"/>
                             <field name="date_of_joining"/>
+                            <field name="book_ids" widget="many2many_tags"/>
+                            <field name="library"/>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Reader Details">
+                                    <field name="reader_name">
+                                        <tree string="Reader Details">
+                                            <field name="borrower_name"/>
+                                            <field name="borrow_book_title"/>
+                                            <field name="quantity"/>
+                                            <field name="price"/>
+                                            <field name="pages"/>
+                                        </tree>
+                                        <form string="Reader details">
+                                            <group>
+                                                <field name="borrower_name"/>
+                                                <field name="borrow_book_title"/>
+                                                <field name="quantity"/>
+                                                <field name="price"/>
+                                                <field name="pages"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
                         </group>
                     </sheet>
                 </form>

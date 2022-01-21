@@ -22,6 +22,8 @@
                     <field name="email"/>
                     <field name="division"/>
                     <field name="contact"/>
+                    <field name="contact_id"/>
+
                 </tree>
             </field>
         </record>
@@ -34,7 +36,7 @@
                     <header>
                         <button name='check_author' type='object' string="Check author" class='btn btn-primary'/>
                     </header>
-                    
+
                     <sheet>
 
                         <group string="Branch details">
@@ -44,6 +46,7 @@
                             <field name="email"/>
                             <field name="division"/>
                             <field name="contact"/>
+                            <field name="contact_id"/>
                         </group>
                     </sheet>
                 </form>

@@ -13,6 +13,8 @@ class Librarian(models.Model):
     phone = fields.Char(string='Phone')
     date_of_joining = fields.Date(string="Date of joining", default=date.today())
 
+    library = fields.Many2one('library.library', string='Library')
+
     @api.onchange('date_of_joining')
     def change_id(self):
         self.user_id = ''
@@ -53,6 +55,7 @@ class Librarian(models.Model):
             raise UserError(_("plaese type email"))
         elif self.email and len(self.email) != 0:
             pattern = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+            #  '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$'
             regex = re.search(pattern, self.email)
             print(regex)
             if not regex:

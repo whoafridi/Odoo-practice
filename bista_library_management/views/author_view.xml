@@ -16,13 +16,15 @@
             <field name="model">library.author</field>
             <field name="arch" type="xml">
                 <tree string="Author details">
-                    <field name="author_id" />
+                    <field name="author_id"/>
                     <field name="name"/>
-                    <field name="author_genre" />
+                    <field name="book_name"/>
+                    <field name="author_genre"/>
                     <field name="author_description"/>
                     <field name="is_author"/>
-                            <field name="book_name"/>
-
+                    <field name="book_ids" widget="many2many_tags"/>
+                    <field name="books_name"/>
+                    <field name="library_deatils"/>
                 </tree>
             </field>
         </record>
@@ -40,7 +42,30 @@
                             <field name="author_genre" />
                             <field name="is_author"/>
                             <field name="book_name"/>
-
+                            <field name="book_ids" widget="many2many_tags"/>
+                            <field name="library_deatils"/>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Book Details">
+                                    <field name="books_name">
+                                        <tree string="Book details" editable='bottom'>
+                                            <field name="name"/>
+                                            <field name="price"/>
+                                            <field name="pages"/>
+                                            <field name="edition"/>
+                                        </tree>
+                                        <form string="Book details">
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="price"/>
+                                                <field name="pages"/>
+                                                <field name="edition"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
                         </group>
                         <footer>
                             <button name='check_name' type='object' string="Check Qualify" class='btn btn-danger'/>

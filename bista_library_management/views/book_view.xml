@@ -29,6 +29,7 @@
                     <field name="isbn_no"/>
                     <field name="isbn_publisher"/>
                     <field name="description"/>
+                    <field name="library"/>
                 </tree>
             </field>
         </record>
@@ -48,6 +49,7 @@
                             <field name="author_genre"/>
                             <field name='email'/>
                             <field name="edition"/>
+                            <field name="library"/>
                             <field name="branch"/>
                             <field name="is_available"/>
                         </group>

@@ -28,6 +28,14 @@
                     <field name="quantity"/>
                     <field name="description"/>
                     <field name="publisher"/>
+                    <field name="book_ids" widget="many2many_tags"/>
+                    <field name="author_ids" widget="many2many_tags"/>
+                    <field name="publications_ids" widget="many2many_tags"/>
+                    <field name="librarian"/>
+                    <field name="book_name"/>
+                    <field name="author_name"/>
+                    <field name="publisher_name"/>
+                    <field name="reader_name"/>
                 </tree>
             </field>
         </record>
@@ -54,6 +62,85 @@
                             <field name="description"/>
                             <field name="publisher"/>
                             <field name="branch"/>
+                            <field name="book_ids" widget="many2many_tags"/>
+                            <field name="author_ids" widget="many2many_tags"/>
+                            <field name="publications_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Librarian Details">
+                                    <field name="librarian">
+                                        <tree string="Librarian" editable='bottom'>
+                                            <field name="name"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="name" string="Name"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="Book Details">
+                                    <field name="book_name">
+                                        <tree string="Book details" editable='bottom'>
+                                            <field name="name"/>
+                                            <field name="price"/>
+                                        </tree>
+                                        <form string="Book details">
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="price"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="Author Details">
+                                    <field name="author_name">
+                                        <tree string="Author details" editable='top'>
+                                            <field name="name"/>
+                                            <field name="author_genre"/>
+                                            <field name="author_description"/>
+                                        </tree>
+                                        <form string="Author details">
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="author_genre"/>
+                                                <field name="author_description"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="Publisher Details">
+                                    <field name="publisher_name">
+                                        <tree string="Publisher details">
+                                            <field name="name"/>
+                                            <field name="author"/>
+                                            <field name="book_name"/>
+                                        </tree>
+                                        <form string="Publisher details">
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="author"/>
+                                                <field name="book_name"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="Reader Details">
+                                    <field name="reader_name">
+                                        <tree string="Reader Details">
+                                            <field name="book_name"/>
+                                            <field name="name"/>
+                                        </tree>
+                                        <form string="Redaer details">
+                                            <group>
+                                                <field name="book_name"/>
+                                                <field name="name"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
                         </group>
                     </sheet>
                 </form>

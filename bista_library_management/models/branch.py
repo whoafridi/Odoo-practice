@@ -1,8 +1,14 @@
+from email.policy import default
 from odoo import fields, models, api
 
 class Branch(models.Model):
     _name = 'library.branch'
     _description = 'library branch info'
+
+    @api.model
+    def _default_company_contact(self):
+        company = self.env['res.company'].search([])
+        return company.phone
 
     name = fields.Char(string="Branch name", required=True)
     branch_address = fields.Char(string='Branch address')
@@ -10,6 +16,7 @@ class Branch(models.Model):
     contact = fields.Char(string="Contact details")
     email = fields.Char(string='Email')
     branch_id = fields.Char(string='Branch ID')
+    contact_id = fields.Char(string="phone", default=_default_company_contact)
 
     @api.multi
     def check_author(self):

@@ -1,3 +1,4 @@
+from email.policy import default
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
@@ -22,22 +23,26 @@ class Book(models.Model):
     _name = "library.book"
     _description = "book info"
     
+    @api.onchange('pages')
+    def _get_price(self):
+        for i in self:
+            i.price = i.pages * 2
     
     name = fields.Char(string="Book name", required=True)
     book_id = fields.Char(string="Book ID")
     author_genre = fields.Selection([('demo_genre','Demo genre'),('science fiction','Science fiction'),('programming','Programming'),('thriller','Thriller'),('horror','Horror'),('historical','Historical')],string='Author written genre')
     email = fields.Char(string='Email')
     edition = fields.Char(string="Copyright Edition", required=True)
-    price = fields.Float(string='Price', required=True)
-    pages = fields.Integer(string='Number of pages')
+    price = fields.Float(string='Price' ,default=_get_price)
+    pages = fields.Integer(string='Number of pages',required=True)
     isbn_no = fields.Char(string='ISBN no')
     description = fields.Text(string="Description of books")
     is_available = fields.Boolean(string="Is available?")
     # relational fields
     author = fields.Many2one('library.author', string='Author name')
+    library = fields.Many2one('library.library', string='Library name')
     branch = fields.Many2one('library.branch', string='Which Branch ?')
     isbn_publisher = fields.Many2one('library.publisher',string='ISBN publisher')
-
 
     @api.model
     def create(self, values):

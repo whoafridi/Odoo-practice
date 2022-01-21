@@ -1,3 +1,4 @@
+from dbm.ndbm import library
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from datetime import datetime
@@ -13,6 +14,12 @@ class User(models.Model):
     user_id = fields.Char(string="User ID")
     phone = fields.Char(string='Phone')
     date_of_joining = fields.Datetime(string="Date of joining")
+
+    book_ids = fields.Many2many('library.book',string="Book list") 
+
+    reader_name = fields.One2many('library.borrowhistory','borrower_name',string='Borrower name')
+    library = fields.Many2one('library.library',string="Library name")
+
 
     @api.model
     def create(self,values):

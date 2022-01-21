@@ -46,6 +46,7 @@
                         <button name='show_borrowhistory' type='object' string="show borrow history" class='btn btn-primary'/>
                         <button name='show_activity' type='object' string="show activity history" class='btn btn-primary'/>
                         <button name='show_requestedbook' type='object' string="show request history" class='btn btn-primary'/>
+                        <button name='detail_library' type='object' string="library many 2 many" class='btn btn-primary'/>
                     </header>
                     <sheet>
                         <group string="Search details">

@@ -12,6 +12,13 @@ class Author(models.Model):
     is_author = fields.Boolean(string="Author")
 
     book_name = fields.Many2one('library.book', string="Book")
+    library_deatils = fields.Many2one('library.library', string="Library details")
+
+
+    book_ids = fields.Many2many('library.book',string="Book list")
+
+    books_name = fields.One2many('library.book','author', string="Books")
+
 
     # self.env['library.author'].search([('is_author','=',True)])
     @api.model

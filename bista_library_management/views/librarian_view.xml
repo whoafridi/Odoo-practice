@@ -21,6 +21,7 @@
                     <field name="user_id"/>
                     <field name="phone"/>
                     <field name="date_of_joining"/>
+                    <field name="library"/>
                 </tree>
             </field>
         </record>
@@ -37,6 +38,7 @@
                             <field name="user_id"/>
                             <field name="phone"/>
                             <field name="date_of_joining"/>
+                    <field name="library"/>
                         </group>
                     </sheet>
                 </form>

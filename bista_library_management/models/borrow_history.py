@@ -1,3 +1,4 @@
+from email.policy import default
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 import re
@@ -6,15 +7,20 @@ class BorrowHistory(models.Model):
     _name = 'library.borrowhistory'
     _description = 'librarian info'
 
+    @api.model
+    def _default_book_pages(self):
+        rec = self.env['library.book'].search([('pages','=',230)],limit=1)
+        return rec.pages
+
     borrow_book_title = fields.Many2one('library.library',string="Borrow book name")
     borrower_id = fields.Char(string="Borrower ID")
     borrower_name = fields.Many2one('library.user',string="Borrower name")
     branch = fields.Many2one('library.branch', string="For which branch ?")
-    borrower_email = fields.Char(string="Borrower email", required=True)
-    borrower_phone = fields.Char(string="Borrower phone", required=True)
+    borrower_email = fields.Char(string="Borrower email")
+    borrower_phone = fields.Char(string="Borrower phone")
     quantity = fields.Integer(string='Quantity', required=True)
     price = fields.Float(string="Price", required=True)
-    pages = fields.Integer(string="Pages", required=True)
+    pages = fields.Integer(string="Pages", default=_default_book_pages)
     edition = fields.Selection([('first','First'),('second','Second'),('third','Third')],string="Edition", required=True)
     
      # #show borrowhistory

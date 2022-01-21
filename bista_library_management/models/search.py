@@ -80,8 +80,9 @@ class Search(models.Model):
                 ('borrow_book_title.name.name','=',self.book_name.name),('borrower_name.name','=',self.reader_name.name),
                 ('borrow_book_title.author.name','=',self.author.name)])
 
-        # book name/author and book/reader and author/reader                
-        elif self.book_name.name and self.reader_name.name or self.book_name.name and self.author.name or self.reader_name.name and self.author.name:
+        # book/author and book/reader and author/reader                
+        elif (self.book_name.name and self.reader_name.name) or (self.book_name.name and self.author.name) or \
+             (self.reader_name.name and self.author.name):
             print("#### 1 ####")
             rec = self.env['library.borrowhistory'].search([
                 '|','|',
@@ -160,4 +161,40 @@ class Search(models.Model):
                 message += f"Book name : {i.title.name} - Requested by : {i.requested_by.name} Author : {i.author.name}\n"
             raise UserError(_(message))
         else:
-            raise UserError(_("user don't request any book"))      
+            raise UserError(_("user don't request any book"))
+        
+    # show library details many2many
+    @api.multi
+    def detail_library(self):
+        message = ''
+        name = self.env['library.library'].search([('book_ids.name','=',self.library.name.name)])
+        for rec in name:
+            message += f"Book name : {rec.book_ids} - Quantity : {rec.quantity} - Author : {rec.author.name}\n"
+            for i in rec.book_ids:
+                message += f"Book name : {i.name} - Branch : {i.branch.name} - Author : {i.author.name}\n"
+        raise UserError(_(message))
+
+# domain example from odoo base-code / / learning purpose
+'''
+domain = [
+            ('id', '!=', fy.id),
+            ('company_id', '=', fy.company_id.id),
+                '|', '|',
+            '&', ('date_from', '<=', fy.date_from), ('date_to', '>=', fy.date_from),
+            '&', ('date_from', '<=', fy.date_to), ('date_to', '>=', fy.date_to),
+            '&', ('date_from', '<=', fy.date_from), ('date_to', '>=', fy.date_to),
+            ]
+domain = [('account_id', '=', self.account_id.id),
+            ('partner_id', '=', self.env['res.partner']._find_accounting_partner(self.partner_id).id),
+            ('reconciled', '=', False),
+            ('move_id.state', '=', 'posted'),
+                '|',
+            '&', ('amount_residual_currency', '!=', 0.0), ('currency_id','!=', None),
+            '&', ('amount_residual_currency', '=', 0.0), '&', ('currency_id','=', None), ('amount_residual', '!=', 0.0)]
+domain = "|"
+if self.book_name.name and self.reader_name.name:
+            domain = "&"
+rec = self.env['library.activity'].search([
+    domain,
+    ('book_name.name','=',self.book_name.name),
+    ('reader_name.name','=',self.reader_name.name)]) '''

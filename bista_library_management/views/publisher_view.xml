@@ -21,6 +21,9 @@
                     <field name="book_name"/>
                     <field name="opening_time"/>
                     <field name="address"/>
+                    <field name="book_ids" widget="many2many_tags"/>
+                    <field name="books_name"/>
+                    <field name="library"/>
                 </tree>
             </field>
         </record>
@@ -37,12 +40,32 @@
                             <field name="book_name"/>
                             <field name="address" />
                             <field name="opening_time"/>
+                            <field name="book_ids" widget="many2many_tags"/>
+                            <field name="library"/>
                         </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                        <group>
+                            <notebook>
+                                <page string="Book Details">
+                                    <field name="books_name">
+                                        <tree string="Book details" editable='bottom'>
+                                            <field name="name"/>
+                                            <field name="price"/>
+                                        </tree>
+                                        <form string="Book details">
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="price"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <menuitem id="library_publisher_menu" parent="book_menu" name="Publisher" action="publisher_menu_action"/>
-    </data>
+    <menuitem id="library_publisher_menu" parent="book_menu" name="Publisher" action="publisher_menu_action"/>
+</data>
 </odoo>
