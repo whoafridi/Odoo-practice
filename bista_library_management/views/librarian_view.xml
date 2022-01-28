@@ -38,13 +38,13 @@
                             <field name="user_id"/>
                             <field name="phone"/>
                             <field name="date_of_joining"/>
-                    <field name="library"/>
+                            <field name="library"/>
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
-        
+
         <menuitem id="library_librarian_menu" parent="book_menu" name="Librarian" action="librarian_menu_action"/>
     </data>
 </odoo>

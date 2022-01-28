@@ -121,12 +121,12 @@ class Search(models.Model):
                 ('reader_name.name','=',self.reader_name.name)])
     
         if rec:
-                for i in rec:
-                    print(i.book_name.name, self)
-                    message += f"Book name : {i.book_name.name} - Reader name : {i.reader_name.name} - email : {i.reader_name.email} - exit time : {i.exit_time}\n"
-                raise UserError(_(message))
+            for i in rec:
+                print(i.book_name.name, self)
+                message += f"Book name : {i.book_name.name} - Reader name : {i.reader_name.name} - email : {i.reader_name.email} - exit time : {i.exit_time}\n"
+            raise UserError(_(message))
         else:
-                raise UserError(_("Requested user don't have any activity"))
+            raise UserError(_("Requested user don't have any activity"))
     
     #show requested book
     @api.multi 

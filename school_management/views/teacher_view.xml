@@ -97,6 +97,6 @@
             </field>
         </record>
         <menuitem id="teacher_menu" name="Teacher" />
-        <menuitem id="school_teacher_menu" parent="teacher_menu" name="Teacher" action="teacher_menu_action" />
+        <menuitem id="school_teacher_menu" parent="teacher_menu" name="Teacher" action="teacher_menu_action"/>
     </data>
 </odoo>

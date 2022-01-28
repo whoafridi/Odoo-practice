@@ -1,4 +1,3 @@
-from email.policy import default
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
@@ -67,7 +66,7 @@ class Book(models.Model):
         return res
 
     @api.multi
-    def check_name(self):
+    def check_name(self): #[('state','not in',('draft','sent'))]
         _name = self.env['library.book'].search(['|',('author.is_author','=',True),('name','=','odoo'),('branch.name','=','Lalmatia')])
         for rec in _name:
             message = f"Book - {rec.name}"
