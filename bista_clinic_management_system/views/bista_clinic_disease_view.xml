@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_menu_clinic_diseases" model="ir.actions.act_window">
+            <field name="name">Diseases</field>
+            <field name="res_model">bistaclinic.diseases</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create</p>
+            </field>
+        </record>
+        <!-- tree view of student model  -->
+        <record id="view_bista_clinic_diseases_tree" model="ir.ui.view">
+            <field name="name">bista.clinic.diseases.tree</field>
+            <field name="model">bistaclinic.diseases</field>
+            <field name="arch" type="xml">
+                <tree string="Bista Clinic Diseases">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="specialized_doctor" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of student model  -->
+        <record id="view_bista_clinic_diseases_form" model="ir.ui.view">
+            <field name="name">bista.clinic.diseases.form.view</field>
+            <field name="model">bistaclinic.diseases</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="specialized_doctor" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_bista_clinic_diseases" parent="menu_bista_clinic_management" name="Diseases" action="action_menu_clinic_diseases"/>
+    </data>
+</odoo>

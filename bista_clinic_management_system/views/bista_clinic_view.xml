@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_menu_clinic" model="ir.actions.act_window">
+            <field name="name">Clinic</field>
+            <field name="res_model">bista.clinic</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create</p>
+            </field>
+        </record>
+        <!-- tree view of student model  -->
+        <record id="view_bista_clinic_tree" model="ir.ui.view">
+            <field name="name">bista.clinic.tree</field>
+            <field name="model">bista.clinic</field>
+            <field name="arch" type="xml">
+                <tree string="Bista Clinic">
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="website"/>
+                    <field name="logo"/>
+                    <field name="employee"/>
+                    <field name="doctor"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form view of student model  -->
+        <record id="view_bista_clinic_form" model="ir.ui.view">
+            <field name="name">bista.clinic.form.view</field>
+            <field name="model">bista.clinic</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="website"/>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Doctor Details">
+                                    <group>
+                                        <field name="doctor"/>
+                                    </group>
+                                </page>
+                                <page string="Nurse Details">
+                                    <group>
+                                        <field name="employee"/>
+                                    </group>
+                                </page>
+                                <page string="Admin Details">
+                                    <group>
+                                        <field name="employee"/>
+                                    </group>
+                                </page>
+                                <page string="Cleaner Details">
+                                    <group>
+                                        <field name="employee"/>
+                                    </group>
+
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <menuitem id="menu_bista_clinic_management" name="Bista Clinic management system" />
+        <menuitem id="menu_bista_clinic" parent="menu_bista_clinic_management" name="Clinic" action="action_menu_clinic" />
+    </data>
+</odoo>

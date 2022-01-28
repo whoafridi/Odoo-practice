@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bista_clinic,access.bista.clinic,model_bista_clinic,base.group_user,1,1,1,1
+access_bistaclinic_employee,access.bistaclinic.employee,model_bistaclinic_employee,base.group_user,1,1,1,1
+access_bistaclinic_doctor,access.bistaclinic.doctor,model_bistaclinic_doctor,base.group_user,1,1,1,1
+access_bistaclinic_patient,access.bistaclinic.patient,model_bistaclinic_patient,base.group_user,1,1,1,1
+access_bistaclinic_diseases,access.bistaclinic.diseases,model_bistaclinic_diseases,base.group_user,1,1,1,1
+access_bistaclinic_appointment,access.bistaclinic.appointment,model_bistaclinic_appointment,base.group_user,1,1,1,1
+
+
+
+
